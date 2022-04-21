@@ -4,6 +4,8 @@ import Details from "./details";
 import { Routes, Route } from "react-router-dom";
 import DataRepository from "./utils/DataRepository";
 import { useEffect, useState } from "react";
+import WeatherDataContext from "./utils/WeatherDataContext";
+import defaultValues from "./utils/defaultVales";
 
 const defaultCities = {
 	berlin: {
@@ -17,16 +19,26 @@ const defaultCities = {
 };
 
 export default function App() {
-	const [berlinData, setBerlinData] = useState({});
-	const [londonData, setLondonData] = useState({});
-	const [currentLocationData, setCurrentLocationData] = useState({});
+	const [berlinData, setBerlinData] = useState(defaultValues);
+	const [londonData, setLondonData] = useState(defaultValues);
+	const [currentLocData, setCurrentLocData] = useState(defaultValues);
+
+	const data = {
+		Berlin: berlinData,
+		London: londonData,
+		"Your location": currentLocData,
+	};
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const [berlin, london] = await Promise.all([
+			const [berlin, london, currentLoc] = await Promise.all([
 				DataRepository.getWeatherData({
 					lat: defaultCities.berlin.lat,
 					lon: defaultCities.berlin.lon,
+				}),
+				DataRepository.getWeatherData({
+					lat: defaultCities.london.lat,
+					lon: defaultCities.london.lon,
 				}),
 				DataRepository.getWeatherData({
 					lat: defaultCities.london.lat,
@@ -36,6 +48,7 @@ export default function App() {
 
 			setBerlinData(berlin);
 			setLondonData(london);
+			setCurrentLocData(currentLoc);
 		};
 
 		fetchData();
@@ -43,21 +56,12 @@ export default function App() {
 
 	return (
 		<div className="App">
-			<Routes>
-				<Route path="/:city" element={<Details />} />
-				<Route
-					path="/"
-					element={
-						<Home
-							weatherData={[
-								berlinData,
-								londonData,
-								currentLocationData,
-							]}
-						/>
-					}
-				/>
-			</Routes>
+			<WeatherDataContext.Provider value={data}>
+				<Routes>
+					<Route path="/:city" element={<Details />} />
+					<Route path="/" element={<Home />} />
+				</Routes>
+			</WeatherDataContext.Provider>
 		</div>
 	);
 }

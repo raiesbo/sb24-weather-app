@@ -1,26 +1,36 @@
 import "./Home.css";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import WeatherDataContext from "./utils/WeatherDataContext";
 
-export default function Home({ weatherData }: any) {
+export default function Home() {
+	const weatherData = useContext(WeatherDataContext);
+
+	console.log("weatherData", weatherData);
+
 	return (
 		<>
-			<h1>Dashboard</h1>
-			<div className="cardsWrapper">
-				{weatherData &&
-					weatherData.map((entry: any) => {
-						console.log(entry);
-						return (
-							entry.name && (
-								<Link to={`/${entry.name}`}>
+			<header>
+				<h1>Dashboard</h1>
+			</header>
+			<main>
+				<div className="cardsWrapper">
+					{weatherData &&
+						Object.entries(weatherData).map((locData: any) => {
+							return (
+								<Link
+									to={`/${locData[0]}`}
+									style={{ textDecoration: "none" }}
+								>
 									<div className="card">
-										<p>{entry.name}</p>
-										<p>{entry.main.temp}</p>
+										<p>{locData[0]}</p>
+										<p>{`${locData[1].main.temp} °C`}</p>
 									</div>
 								</Link>
-							)
-						);
-					})}
-			</div>
+							);
+						})}
+				</div>
+			</main>
 		</>
 	);
 }
