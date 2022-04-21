@@ -4,7 +4,7 @@ import defaultValues from "./defaultVales";
 const WeatherDataContext = React.createContext({
 	Berlin: defaultValues,
 	London: defaultValues,
-	"Your location": defaultValues,
+	"My location": defaultValues,
 });
 
 export default WeatherDataContext;

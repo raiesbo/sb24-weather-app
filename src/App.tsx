@@ -26,7 +26,7 @@ export default function App() {
 	const data = {
 		Berlin: berlinData,
 		London: londonData,
-		"Your location": currentLocData,
+		"My location": currentLocData,
 	};
 
 	useEffect(() => {

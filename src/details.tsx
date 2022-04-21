@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useContext } from "react";
 import WeatherDataContext from "./utils/WeatherDataContext";
 import getCityFromPath from "./utils/getCityFromUrl";
@@ -12,20 +12,27 @@ export default function Details() {
 	console.log("weatherData", weatherData);
 	return (
 		<>
-			<header>
-				<h1>{`Weather from ${city}`}</h1>
+			<header className="mainHeader">
+				<Link className="arrowLink" to={"/"}>
+					<i className="fa-solid fa-arrow-left fa-2xl arrow"></i>
+				</Link>
+				<h1>
+					{`Weather in ${city}`}
+					<sup>{weather.sys.country}</sup>
+				</h1>
 			</header>
 			<main>
 				{weatherData[city] && (
 					<div className="city">
-						<h2 className="cityName">
+						{/* <h2 className="cityName">
 							<span>{weather.name}</span>
 							<sup>{weather.sys.country}</sup>
-						</h2>
+						</h2> */}
 
 						<div className="cityTemp">
-							{Math.round(weather.main.temp)}
-							<sup>&deg;</sup>
+							<p>{weather.weather[0].description}</p>
+							{`${Math.round(weather.main.temp)}`}
+							<sup>&deg;</sup>C
 						</div>
 
 						<div className="info">

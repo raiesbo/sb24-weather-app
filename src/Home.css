@@ -1,19 +1,16 @@
 .cardsWrapper {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
 	gap: 30px;
 }
 
 .card {
-	min-width: 250px;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
 	padding: 5px 15px;
 	border: 1px solid black;
 	transition: all 150ms ease-in-out;
-
 	font-weight: 700;
 	color: black;
 }
@@ -22,4 +19,10 @@
 	box-shadow: 2px 5px 5px var(--shadow-color);
 	background-color: black;
 	color: white;
+}
+
+@media only screen and (max-width: 600px) {
+	.cardsWrapper {
+		gap: 15px;
+	}
 }
