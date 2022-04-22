@@ -1,6 +1,6 @@
 import "./App.css";
 import Home from "./Home";
-import Details from "./details";
+import Details from "./City";
 import { Routes, Route } from "react-router-dom";
 import DataRepository from "./utils/DataRepository";
 import { useEffect, useState } from "react";
