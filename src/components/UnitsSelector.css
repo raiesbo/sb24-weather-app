@@ -1,0 +1,25 @@
+.unitsSelectorWrapper {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	margin: auto;
+	margin-bottom: 30px;
+}
+
+.unitsSelector {
+	border: 0;
+	font-size: 17px;
+	width: min-content;
+	margin-left: 3px;
+	font-weight: 600;
+	text-align: center;
+	appearance: none;
+	cursor: pointer;
+	transition: all 150ms ease-in-out;
+}
+
+.unitsSelector:hover {
+	color: white;
+	background-color: black;
+}

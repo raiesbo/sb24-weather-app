@@ -1,5 +1,8 @@
 import "./DashboardItem.css";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import UnitsContext from "../context/UnitsContext";
+import formatTemp from "../utils/formatTemp";
 
 type Props = {
 	name: string;
@@ -7,6 +10,8 @@ type Props = {
 };
 
 export default function DashboardItem({ name, data }: Props) {
+	const { withFahrenheit } = useContext(UnitsContext);
+
 	return !data?.name ? (
 		<div className="card">
 			<p>{name}</p>
@@ -16,7 +21,7 @@ export default function DashboardItem({ name, data }: Props) {
 		<Link to={`/${name}`} style={{ textDecoration: "none" }}>
 			<div className="card">
 				<p>{name === "My location" ? data.name : name}</p>
-				<p>{`${Math.round(data.main.temp)} °C`}</p>
+				<p>{formatTemp(data.main.temp, withFahrenheit)}</p>
 			</div>
 		</Link>
 	);

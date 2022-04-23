@@ -1,8 +1,8 @@
+import "./City.css";
 import { Link, useLocation } from "react-router-dom";
 import { useContext } from "react";
-import WeatherDataContext from "./utils/WeatherDataContext";
+import WeatherDataContext from "./context/WeatherDataContext";
 import getCityFromPath from "./utils/getCityFromUrl";
-import "./City.css";
 import WeatherInfo from "./components/WeatherInfo";
 import WeatherTemperature from "./components/WeatherTemperature";
 

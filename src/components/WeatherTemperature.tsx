@@ -1,4 +1,7 @@
 import "./WeatherTemperature.css";
+import UnitsContext from "../context/UnitsContext";
+import { useContext } from "react";
+import formatTemp from "../utils/formatTemp";
 
 type Props = {
 	description: string;
@@ -15,6 +18,8 @@ export default function WeatherTemperature({
 	tempMax,
 	tempMin,
 }: Props) {
+	const { withFahrenheit } = useContext(UnitsContext);
+
 	return (
 		<div className="cityTemp">
 			<div className="info">
@@ -26,13 +31,13 @@ export default function WeatherTemperature({
 					title={description}
 				/>
 			</div>
-			<p className="mainTemp">{`${Math.round(temp)}°C`}</p>
+			<p className="mainTemp">{formatTemp(temp, withFahrenheit)}</p>
 			<div className="subTempWrapper">
 				<p className="subTemp">
-					H: {`${Math.round(tempMax)}`} <sup>&deg;</sup>C
+					H: {formatTemp(tempMax, withFahrenheit)} <sup>&deg;</sup>C
 				</p>
 				<p>
-					L: {`${Math.round(tempMin)}`} <sup>&deg;</sup>C
+					L: {formatTemp(tempMin, withFahrenheit)} <sup>&deg;</sup>C
 				</p>
 			</div>
 		</div>

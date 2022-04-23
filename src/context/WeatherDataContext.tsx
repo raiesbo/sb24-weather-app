@@ -1,5 +1,5 @@
 import React from "react";
-import defaultValues from "./defaultVales";
+import defaultValues from "../utils/defaultVales";
 
 const WeatherDataContext = React.createContext({
 	Berlin: defaultValues,

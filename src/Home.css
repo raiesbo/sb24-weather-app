@@ -4,24 +4,6 @@
 	gap: 30px;
 }
 
-.card {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	padding: 10px 15px;
-	border: 2px solid black;
-	transition: all 150ms ease-in-out;
-	font-size: 20px;
-	font-weight: 700;
-	color: black;
-}
-
-.card:hover {
-	box-shadow: 2px 5px 5px var(--shadow-color);
-	background-color: black;
-	color: white;
-}
-
 @media only screen and (max-width: 600px) {
 	.cardsWrapper {
 		gap: 15px;

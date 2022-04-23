@@ -2,16 +2,17 @@ import "./App.css";
 import Home from "./Home";
 import Details from "./City";
 import { Routes, Route } from "react-router-dom";
-import DataRepository from "./utils/DataRepository";
 import { useEffect, useState } from "react";
-import WeatherDataContext from "./utils/WeatherDataContext";
-import defaultValues from "./utils/defaultVales";
+import DataRepository from "./utils/DataRepository";
+import WeatherDataContext from "./context/WeatherDataContext";
+import UnitsContext from "./context/UnitsContext";
 
 export default function App() {
-	const [berlinData, setBerlinData] = useState(defaultValues);
-	const [londonData, setLondonData] = useState(defaultValues);
+	const [berlinData, setBerlinData] = useState(null);
+	const [londonData, setLondonData] = useState(null);
 	const [currentLocData, setCurrentLocData] = useState(null);
 	const [currentLocCoords, setCurrentLocCoords] = useState(null);
+	const [withFahrenheit, setWithFahrenheit] = useState(false);
 
 	const defaultCities = {
 		berlin: {
@@ -24,13 +25,8 @@ export default function App() {
 		},
 	};
 
-	const data = {
-		Berlin: berlinData,
-		London: londonData,
-		"My location": currentLocData,
-	};
-
 	const fetchData = async () => {
+		if (berlinData && londonData) return;
 		const [berlin, london] = await Promise.all([
 			DataRepository.getWeatherData({
 				lat: defaultCities.berlin.lat,
@@ -46,6 +42,7 @@ export default function App() {
 	};
 
 	const fetchLocData = async () => {
+		if (currentLocData || !currentLocCoords) return;
 		const currentLoc = await Promise.resolve(
 			DataRepository.getWeatherData({
 				lat: currentLocCoords.lat,
@@ -57,13 +54,11 @@ export default function App() {
 
 	useEffect(() => {
 		// Fetch default cities data
-		// fetchData();
-
+		fetchData();
 		// Get localization coords
 		navigator.geolocation.getCurrentPosition(function (position) {
 			let lat = position.coords.latitude;
 			let lon = position.coords.longitude;
-
 			setCurrentLocCoords({
 				lat: parseFloat(lat.toFixed(2)),
 				lon: parseFloat(lon.toFixed(2)),
@@ -72,16 +67,27 @@ export default function App() {
 	}, []);
 
 	useEffect(() => {
-		// fetchLocData();
+		// Fetch user's data
+		fetchLocData();
 	}, [currentLocCoords]);
 
 	return (
 		<div className="App">
-			<WeatherDataContext.Provider value={data}>
-				<Routes>
-					<Route path="/:city" element={<Details />} />
-					<Route path="/" element={<Home />} />
-				</Routes>
+			<WeatherDataContext.Provider
+				value={{
+					Berlin: berlinData,
+					London: londonData,
+					"My location": currentLocData,
+				}}
+			>
+				<UnitsContext.Provider
+					value={{ withFahrenheit, setWithFahrenheit }}
+				>
+					<Routes>
+						<Route path="/:city" element={<Details />} />
+						<Route path="/" element={<Home />} />
+					</Routes>
+				</UnitsContext.Provider>
 			</WeatherDataContext.Provider>
 		</div>
 	);
