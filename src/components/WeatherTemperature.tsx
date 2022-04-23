@@ -33,12 +33,8 @@ export default function WeatherTemperature({
 			</div>
 			<p className="mainTemp">{formatTemp(temp, withFahrenheit)}</p>
 			<div className="subTempWrapper">
-				<p className="subTemp">
-					H: {formatTemp(tempMax, withFahrenheit)} <sup>&deg;</sup>C
-				</p>
-				<p>
-					L: {formatTemp(tempMin, withFahrenheit)} <sup>&deg;</sup>C
-				</p>
+				<p>H: {formatTemp(tempMax, withFahrenheit)}</p>
+				<p>L: {formatTemp(tempMin, withFahrenheit)}</p>
 			</div>
 		</div>
 	);

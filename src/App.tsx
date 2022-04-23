@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import DataRepository from "./utils/DataRepository";
 import WeatherDataContext from "./context/WeatherDataContext";
 import UnitsContext from "./context/UnitsContext";
+import ErrorModal from "./components/ErrorModal";
 
 export default function App() {
 	const [berlinData, setBerlinData] = useState(null);
@@ -13,6 +14,7 @@ export default function App() {
 	const [currentLocData, setCurrentLocData] = useState(null);
 	const [currentLocCoords, setCurrentLocCoords] = useState(null);
 	const [withFahrenheit, setWithFahrenheit] = useState(false);
+	const [isModalActive, setIsModalActive] = useState(false);
 
 	const defaultCities = {
 		berlin: {
@@ -56,14 +58,17 @@ export default function App() {
 		// Fetch default cities data
 		fetchData();
 		// Get localization coords
-		navigator.geolocation.getCurrentPosition(function (position) {
-			let lat = position.coords.latitude;
-			let lon = position.coords.longitude;
-			setCurrentLocCoords({
-				lat: parseFloat(lat.toFixed(2)),
-				lon: parseFloat(lon.toFixed(2)),
-			});
-		});
+		navigator.geolocation.getCurrentPosition(
+			(position) => {
+				let lat = position.coords.latitude;
+				let lon = position.coords.longitude;
+				setCurrentLocCoords({
+					lat: parseFloat(lat.toFixed(2)),
+					lon: parseFloat(lon.toFixed(2)),
+				});
+			},
+			() => setIsModalActive(true)
+		);
 	}, []);
 
 	useEffect(() => {
@@ -87,6 +92,10 @@ export default function App() {
 						<Route path="/:city" element={<Details />} />
 						<Route path="/" element={<Home />} />
 					</Routes>
+					<ErrorModal
+						isActive={isModalActive}
+						modalHandler={setIsModalActive}
+					/>
 				</UnitsContext.Provider>
 			</WeatherDataContext.Provider>
 		</div>

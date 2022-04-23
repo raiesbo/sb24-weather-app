@@ -1,0 +1,18 @@
+.errorModal {
+	position: absolute;
+	bottom: 15px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 10px;
+	border: 1px solid black;
+	max-width: calc(var(--max-width) - 30px);
+	width: calc(100% - 30px);
+}
+
+.errorMessage {
+	flex-grow: 1;
+	color: rgb(185, 85, 85);
+	font-weight: 600;
+	margin-right: 10px;
+}
