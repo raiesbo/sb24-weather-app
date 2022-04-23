@@ -1,0 +1,43 @@
+.weatherInfoWrapper {
+	max-width: 240px;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.sunInfo {
+	width: 120px;
+	height: 80px;
+	padding: 10px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 5px;
+}
+
+.sunInfoData {
+	font-size: 30px;
+	font-weight: 600;
+}
+
+.sunInfo:first-child {
+	border-bottom: 1px solid black;
+	border-right: 1px solid black;
+}
+
+.sunInfo:nth-child(2) {
+	border-left: 1px solid black;
+	border-bottom: 1px solid black;
+}
+
+.sunInfo:nth-child(3) {
+	border-top: 1px solid black;
+	border-right: 1px solid black;
+}
+
+.sunInfo:last-child {
+	border-top: 1px solid black;
+	border-left: 1px solid black;
+}

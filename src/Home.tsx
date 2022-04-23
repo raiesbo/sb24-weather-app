@@ -1,12 +1,10 @@
 import "./Home.css";
-import { Link } from "react-router-dom";
 import { useContext } from "react";
 import WeatherDataContext from "./utils/WeatherDataContext";
+import DashboardItem from "./components/DashboardItem";
 
 export default function Home() {
 	const weatherData = useContext(WeatherDataContext);
-
-	console.log("weatherData", weatherData);
 
 	return (
 		<>
@@ -16,19 +14,13 @@ export default function Home() {
 			<main>
 				<div className="cardsWrapper">
 					{weatherData &&
-						Object.entries(weatherData).map((locData) => {
+						Object.entries(weatherData).map((locData, i) => {
 							return (
-								<Link
-									to={`/${locData[0]}`}
-									style={{ textDecoration: "none" }}
-								>
-									<div className="card">
-										<p>{locData[0]}</p>
-										<p>{`${Math.round(
-											locData[1].main.temp
-										)} °C`}</p>
-									</div>
-								</Link>
+								<DashboardItem
+									name={locData[0]}
+									data={locData[1]}
+									key={i}
+								/>
 							);
 						})}
 				</div>
