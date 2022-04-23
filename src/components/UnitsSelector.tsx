@@ -12,13 +12,13 @@ export default function UnitsSelector() {
 	return (
 		<div className="unitsSelectorWrapper">
 			<label>Temperature unit:</label>
-			<select className="unitsSelector" onChange={changeHandler}>
-				<option value="Celsius" selected={!withFahrenheit}>
-					Celsius
-				</option>
-				<option value="Fahrenheit" selected={withFahrenheit}>
-					Fahrenheit
-				</option>
+			<select
+				className="unitsSelector"
+				onChange={changeHandler}
+				value={withFahrenheit ? "Fahrenheit" : "Celsius"}
+			>
+				<option value="Celsius">Celsius</option>
+				<option value="Fahrenheit">Fahrenheit</option>
 			</select>
 		</div>
 	);

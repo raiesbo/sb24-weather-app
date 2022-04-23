@@ -5,6 +5,7 @@ import WeatherDataContext from "./context/WeatherDataContext";
 import getCityFromPath from "./utils/getCityFromUrl";
 import WeatherInfo from "./components/WeatherInfo";
 import WeatherTemperature from "./components/WeatherTemperature";
+import formatString from "./utils/formatString";
 
 export default function Details() {
 	const weatherData = useContext(WeatherDataContext);
@@ -12,14 +13,17 @@ export default function Details() {
 	const city = getCityFromPath(useLocation().pathname) as ObjectKey;
 	const weather = weatherData[city];
 
-	console.log("weatherData", weatherData);
 	return (
 		<>
 			<header className="mainHeader">
 				<Link className="arrowLink" to={"/"}>
 					<i className="fa-solid fa-arrow-left fa-2xl arrow"></i>
 				</Link>
-				<h1>{`${city === "My location" ? weather.name : city}`}</h1>
+				<h1>
+					{formatString(
+						`${city === "my location" ? weather.name : city}`
+					)}
+				</h1>
 			</header>
 			<main>
 				{weatherData[city] && (

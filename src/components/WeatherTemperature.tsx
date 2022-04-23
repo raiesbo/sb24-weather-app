@@ -2,6 +2,7 @@ import "./WeatherTemperature.css";
 import UnitsContext from "../context/UnitsContext";
 import { useContext } from "react";
 import formatTemp from "../utils/formatTemp";
+import formatString from "../utils/formatString";
 
 type Props = {
 	description: string;
@@ -23,7 +24,7 @@ export default function WeatherTemperature({
 	return (
 		<div className="cityTemp">
 			<div className="info">
-				<p>{description}</p>
+				<p>{formatString(description)}</p>
 				<img
 					className="weatherIcon"
 					src={`https://openweathermap.org/img/wn/${icon}@2x.png`}

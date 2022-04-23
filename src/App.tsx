@@ -80,9 +80,9 @@ export default function App() {
 		<div className="App">
 			<WeatherDataContext.Provider
 				value={{
-					Berlin: berlinData,
-					London: londonData,
-					"My location": currentLocData,
+					berlin: berlinData,
+					london: londonData,
+					"my location": currentLocData,
 				}}
 			>
 				<UnitsContext.Provider

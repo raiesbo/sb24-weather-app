@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import UnitsContext from "../context/UnitsContext";
 import formatTemp from "../utils/formatTemp";
+import formatString from "../utils/formatString";
 
 type Props = {
 	name: string;
@@ -20,7 +21,7 @@ export default function DashboardItem({ name, data }: Props) {
 	) : (
 		<Link to={`/${name}`} style={{ textDecoration: "none" }}>
 			<div className="card">
-				<p>{name === "My location" ? data.name : name}</p>
+				<p>{formatString(name === "my location" ? data.name : name)}</p>
 				<p>{formatTemp(data.main.temp, withFahrenheit)}</p>
 			</div>
 		</Link>
