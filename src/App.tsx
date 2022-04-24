@@ -3,7 +3,7 @@ import Home from "./Home";
 import Details from "./City";
 import { Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
-import DataRepository from "./utils/DataRepository";
+import getWeatherData from "./utils/DataRepository";
 import WeatherDataContext from "./context/WeatherDataContext";
 import UnitsContext from "./context/UnitsContext";
 import ErrorModal from "./components/ErrorModal";
@@ -27,34 +27,23 @@ export default function App() {
 		},
 	};
 
-	const fetchData = async () => {
-		if (berlinData && londonData) return;
-		const [berlin, london] = await Promise.all([
-			DataRepository.getWeatherData({
-				lat: defaultCities.berlin.lat,
-				lon: defaultCities.berlin.lon,
-			}),
-			DataRepository.getWeatherData({
-				lat: defaultCities.london.lat,
-				lon: defaultCities.london.lon,
-			}),
-		]);
-		setBerlinData(berlin);
-		setLondonData(london);
-	};
-
-	const fetchLocData = async () => {
-		if (currentLocData || !currentLocCoords) return;
-		const currentLoc = await Promise.resolve(
-			DataRepository.getWeatherData({
-				lat: currentLocCoords.lat,
-				lon: currentLocCoords.lon,
-			})
-		);
-		setCurrentLocData(currentLoc);
-	};
-
 	useEffect(() => {
+		const fetchData = async () => {
+			if (berlinData && londonData) return;
+			const [berlin, london] = await Promise.all([
+				getWeatherData({
+					lat: defaultCities.berlin.lat,
+					lon: defaultCities.berlin.lon,
+				}),
+				getWeatherData({
+					lat: defaultCities.london.lat,
+					lon: defaultCities.london.lon,
+				}),
+			]);
+			setBerlinData(berlin);
+			setLondonData(london);
+		};
+
 		// Fetch default cities data
 		fetchData();
 		// Get localization coords
@@ -73,6 +62,17 @@ export default function App() {
 	}, []);
 
 	useEffect(() => {
+		const fetchLocData = async () => {
+			if (currentLocData || !currentLocCoords) return;
+			const currentLoc = await Promise.resolve(
+				getWeatherData({
+					lat: currentLocCoords.lat,
+					lon: currentLocCoords.lon,
+				})
+			);
+			setCurrentLocData(currentLoc);
+		};
+
 		// Fetch user's data
 		fetchLocData();
 		// @ts-ignore

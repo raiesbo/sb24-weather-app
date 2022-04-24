@@ -1,4 +1,4 @@
-import DataRepository from "./DataRepository";
+import getWeatherData from "./DataRepository";
 
 const mockFetch = jest.spyOn(global, "fetch");
 
@@ -11,7 +11,7 @@ describe("repository tests", () => {
 			})
 		);
 
-		const fetchedData = await DataRepository.getWeatherData({
+		const fetchedData = await getWeatherData({
 			lat: 0,
 			lon: 0,
 		});

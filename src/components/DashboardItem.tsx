@@ -21,7 +21,7 @@ export default function DashboardItem({ name, data }: Props) {
 	) : (
 		<Link to={`/${name}`} style={{ textDecoration: "none" }}>
 			<div className="card">
-				<p>{formatString(name === "my location" ? data.name : name)}</p>
+				<p>{formatString(name === "myLocation" ? data.name : name)}</p>
 				<p>{formatTemp(data.main.temp, withFahrenheit)}</p>
 			</div>
 		</Link>
