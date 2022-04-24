@@ -1,3 +1,5 @@
+// https://developer.mozilla.org/en-US/docs/Web/CSS/text-transform capitalize
+
 export default function formatString(text: string) {
 	if (!text) return "";
 	const textArr = text.split(" ");
