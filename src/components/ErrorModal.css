@@ -12,7 +12,11 @@
 
 .errorMessage {
 	flex-grow: 1;
-	color: rgb(185, 85, 85);
+	color: rgb(199, 31, 31);
 	font-weight: 600;
 	margin-right: 10px;
+}
+
+.errorModal i {
+	cursor: pointer;
 }
