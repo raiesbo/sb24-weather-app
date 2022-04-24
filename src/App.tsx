@@ -27,23 +27,34 @@ export default function App() {
 		},
 	};
 
-	useEffect(() => {
-		const fetchData = async () => {
-			if (berlinData && londonData) return;
-			const [berlin, london] = await Promise.all([
-				getWeatherData({
-					lat: defaultCities.berlin.lat,
-					lon: defaultCities.berlin.lon,
-				}),
-				getWeatherData({
-					lat: defaultCities.london.lat,
-					lon: defaultCities.london.lon,
-				}),
-			]);
-			setBerlinData(berlin);
-			setLondonData(london);
-		};
+	const fetchData = async () => {
+		if (berlinData && londonData) return;
+		const [berlin, london] = await Promise.all([
+			getWeatherData({
+				lat: defaultCities.berlin.lat,
+				lon: defaultCities.berlin.lon,
+			}),
+			getWeatherData({
+				lat: defaultCities.london.lat,
+				lon: defaultCities.london.lon,
+			}),
+		]);
+		setBerlinData(berlin);
+		setLondonData(london);
+	};
 
+	const fetchLocData = async () => {
+		if (currentLocData || !currentLocCoords) return;
+		const currentLoc = await Promise.resolve(
+			getWeatherData({
+				lat: currentLocCoords.lat,
+				lon: currentLocCoords.lon,
+			})
+		);
+		setCurrentLocData(currentLoc);
+	};
+
+	useEffect(() => {
 		// Fetch default cities data
 		fetchData();
 		// Get localization coords
@@ -58,24 +69,13 @@ export default function App() {
 			},
 			() => setIsModalActive(true)
 		);
-		// @ts-ignore
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	useEffect(() => {
-		const fetchLocData = async () => {
-			if (currentLocData || !currentLocCoords) return;
-			const currentLoc = await Promise.resolve(
-				getWeatherData({
-					lat: currentLocCoords.lat,
-					lon: currentLocCoords.lon,
-				})
-			);
-			setCurrentLocData(currentLoc);
-		};
-
 		// Fetch user's data
 		fetchLocData();
-		// @ts-ignore
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [currentLocCoords]);
 
 	return (
