@@ -7,12 +7,12 @@
 ### Main technologies
 
 - React
-- Typscript
+- Typescript
 - CSS
 
 ### Run the project
 
-1. Make use to use the correct Node version `nvm use` (.nvmrc).
+1. Make sure to use the correct Node version `nvm use` (.nvmrc).
 2. Run `npm run build` to generate the optimised version of the app.
 3. Start the app with the `npm run start` command.
 
@@ -26,10 +26,10 @@ Launches the test runner in the interactive watch mode (without the correct node
 
 ### The geolocalization API
 
-To access the use's localisation, it is implemented the `Geolocation API` provided la JavaScript and available from the client side. For the API to be able to work, the user requires allowing the location access in its browser. [More info](https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API).
+To access the user's localisation, it is implemented the `Geolocation API` provided that JavaScript is available from the client side. For the API to be able to work, the user requires allowing the location access in its browser. [More info](https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API).
 
 In case the user did not have the location already available, a pop-up message will show up at the bottom of the viewport to make the user aware of it.
 
 ### Use of the context API
 
-To manage the general app's state, the application uses react's `context API` and the `useContext` hook that allows to share information across the application injecting the data directly in the required component. Due to the scope of the app, it is not implemented as a traditional “store” with its verbose development, but as a single way to share “global” information. [More info](https://reactjs.org/docs/context.html).
+To manage the general app state, the application uses react's `context API` and the `useContext` hook that allows to share information across the application injecting the data directly in the required component. Due to the scope of the app, it is not implemented as a traditional “store” with its verbose development, but as a single way to share “global” information. [More info](https://reactjs.org/docs/context.html).

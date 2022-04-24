@@ -7,6 +7,7 @@ type Props = {
 	visibility: number;
 };
 
+// The "suninfo" divs would be better extracted into its own component instead of copying and pasting
 export default function WeatherInfo({
 	sunrise,
 	sunset,

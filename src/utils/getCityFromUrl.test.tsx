@@ -23,6 +23,8 @@ const casesSuit = [
 	},
 ];
 
+// Same as the other tests
+
 describe("get city from path", () => {
 	it("returns the correct city", () => {
 		for (let singleCase of casesSuit) {

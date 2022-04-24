@@ -28,6 +28,8 @@ const casesSuit = [
 	},
 ];
 
+// Same as the formatString.test comment
+
 describe("format temperature", () => {
 	it("returns the right format", () => {
 		for (let singleCase of casesSuit) {

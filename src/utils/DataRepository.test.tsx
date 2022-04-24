@@ -1,6 +1,9 @@
 import getWeatherData from "./DataRepository";
 
+// There's not really a reason why you are mocking fetch at a global scope
 const mockFetch = jest.spyOn(global, "fetch");
+
+// Instead of using "mockImplementation" you could have used mockResolvedValueOnce to return the value directly instead of creating a promise
 
 describe("repository tests", () => {
 	it("returns the data", async () => {

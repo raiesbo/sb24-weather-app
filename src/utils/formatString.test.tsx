@@ -19,6 +19,8 @@ const casesSuit = [
 	},
 ];
 
+// When you write tests you must be descriptive of what the expected value should be, putting them in an array makes it difficult for a person to read and refactor
+
 describe("format temperature", () => {
 	it("returns the right format", () => {
 		for (let singleCase of casesSuit) {

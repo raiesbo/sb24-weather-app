@@ -16,6 +16,7 @@ export default function Home() {
 				<UnitsSelector />
 				<div className="cardsWrapper">
 					{weatherData &&
+						// Why didn't you return the JSX directly instead of creating a function scope just to return it?
 						Object.entries(weatherData).map((locData, i) => {
 							return (
 								<DashboardItem

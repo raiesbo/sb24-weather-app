@@ -2,6 +2,8 @@ import "./UnitsSelector.css";
 import { useContext } from "react";
 import UnitsContext from "../context/UnitsContext";
 
+// The active value could have been simplified with e.target.value !== "Celsius"
+// Your UnitsContext could have been simplified a lot if you saved the actual value, C or F instead of a boolean
 export default function UnitsSelector() {
 	const { withFahrenheit, setWithFahrenheit } = useContext(UnitsContext);
 

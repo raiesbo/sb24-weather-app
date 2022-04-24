@@ -1,3 +1,5 @@
+// No need to append "Type" since we know it's a type
+
 type WeatherDataType = {
 	coord: {
 		lon: number;

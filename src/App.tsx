@@ -8,14 +8,18 @@ import WeatherDataContext from "./context/WeatherDataContext";
 import UnitsContext from "./context/UnitsContext";
 import ErrorModal from "./components/ErrorModal";
 
+// All those states could have been better represented with useReducer and a "LocationsObject"
+
 export default function App() {
 	const [berlinData, setBerlinData] = useState(null);
 	const [londonData, setLondonData] = useState(null);
 	const [currentLocData, setCurrentLocData] = useState(null);
+	// Did you mean
 	const [currentLocCoords, setCurrentLocCoords] = useState(null);
 	const [withFahrenheit, setWithFahrenheit] = useState(false);
 	const [isModalActive, setIsModalActive] = useState(false);
 
+	// No need to make this an object, const defaultCities = [{lat, lon}] would have given you an easier time working with all the cities
 	const defaultCities = {
 		berlin: {
 			lat: 52.5170365,
@@ -29,6 +33,7 @@ export default function App() {
 
 	const fetchData = async () => {
 		if (berlinData && londonData) return;
+		// const [berlin, london] = await Promise.all(defaultCities.map(city => getWeatherData(city)))
 		const [berlin, london] = await Promise.all([
 			getWeatherData({
 				lat: defaultCities.berlin.lat,
@@ -46,6 +51,7 @@ export default function App() {
 	const fetchLocData = async () => {
 		if (currentLocData || !currentLocCoords) return;
 		const currentLoc = await Promise.resolve(
+			// getWeatherData(currentLocCoords)
 			getWeatherData({
 				lat: currentLocCoords.lat,
 				lon: currentLocCoords.lon,
@@ -73,12 +79,15 @@ export default function App() {
 	}, []);
 
 	useEffect(() => {
+		// Wouldn't it be better to write the fetchLocData here? you are only using it in this useEffect
+
 		// Fetch user's data
 		fetchLocData();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [currentLocCoords]);
 
 	return (
+		// In all the other classes you are using camelCase, why did you capitalize App?
 		<div className="App">
 			<WeatherDataContext.Provider
 				value={{
