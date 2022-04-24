@@ -4,9 +4,8 @@ export default {
 		const URL = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`;
 		try {
 			const response = await fetch(URL);
-
-			console.log("response", response);
-			return await response.json();
+			const data = await response.json();
+			return data;
 		} catch (e) {
 			return e;
 		}

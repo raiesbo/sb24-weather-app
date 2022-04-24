@@ -33,7 +33,9 @@ export default function WeatherInfo({
 			</div>
 			<div className="sunInfo">
 				<p>Visibility</p>
-				<p className="sunInfoData">{visibility}</p>
+				<p className="sunInfoData">{`${Math.round(
+					visibility / 1000
+				)} Km`}</p>
 			</div>
 		</div>
 	);

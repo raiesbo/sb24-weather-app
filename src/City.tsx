@@ -2,7 +2,7 @@ import "./City.css";
 import { Link, useLocation } from "react-router-dom";
 import { useContext } from "react";
 import WeatherDataContext from "./context/WeatherDataContext";
-import getCityFromPath from "./utils/getCityFromUrl";
+import getCityFromUrl from "./utils/getCityFromUrl";
 import WeatherInfo from "./components/WeatherInfo";
 import WeatherTemperature from "./components/WeatherTemperature";
 import formatString from "./utils/formatString";
@@ -10,7 +10,7 @@ import formatString from "./utils/formatString";
 export default function Details() {
 	const weatherData = useContext(WeatherDataContext);
 	type ObjectKey = keyof typeof weatherData;
-	const city = getCityFromPath(useLocation().pathname) as ObjectKey;
+	const city = getCityFromUrl(useLocation().pathname) as ObjectKey;
 	const weather = weatherData[city];
 
 	return (
@@ -21,7 +21,7 @@ export default function Details() {
 				</Link>
 				<h1>
 					{formatString(
-						`${city === "my location" ? weather.name : city}`
+						`${city === "myLocation" ? weather.name : city}`
 					)}
 				</h1>
 			</header>

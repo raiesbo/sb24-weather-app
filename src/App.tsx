@@ -82,7 +82,7 @@ export default function App() {
 				value={{
 					berlin: berlinData,
 					london: londonData,
-					"my location": currentLocData,
+					myLocation: currentLocData,
 				}}
 			>
 				<UnitsContext.Provider

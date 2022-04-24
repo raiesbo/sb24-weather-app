@@ -12,6 +12,11 @@ const casesSuit = [
 		isFahrenheit: false,
 	},
 	{
+		data: 0,
+		solution: "0 °C",
+		isFahrenheit: false,
+	},
+	{
 		data: 26.35,
 		solution: "79 °F",
 		isFahrenheit: true,
