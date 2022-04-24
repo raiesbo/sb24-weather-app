@@ -11,7 +11,7 @@ export default function UnitsSelector() {
 
 	return (
 		<div className="unitsSelectorWrapper">
-			<label>Temperature unit:</label>
+			<label>Preferred units:</label>
 			<select
 				className="unitsSelector"
 				onChange={changeHandler}
