@@ -12,8 +12,8 @@ export default function ErrorModal({
 	return (
 		<div className="errorModal">
 			<p className="errorMessage">
-				The geolocation needs to be activated to display your location`s
-				weather.
+				The geolocation needs to be activated in your browser to display
+				your current location's weather.
 			</p>
 			<i
 				className="fa-solid fa-x"
