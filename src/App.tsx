@@ -69,12 +69,12 @@ export default function App() {
 			},
 			() => setIsModalActive(true)
 		);
-	}, []);
+	}, [fetchLocData]);
 
 	useEffect(() => {
 		// Fetch user's data
 		fetchLocData();
-	}, [currentLocCoords]);
+	}, [currentLocCoords, fetchLocData]);
 
 	return (
 		<div className="App">
